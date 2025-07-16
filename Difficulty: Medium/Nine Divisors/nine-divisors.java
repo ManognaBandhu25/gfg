@@ -2,7 +2,7 @@ import java.util.*;
 
 class Solution {
     public static int countNumbers(int n) {
-        // Sieve to find all primes up to sqrt(n)
+        
         int limit = (int)Math.sqrt(n) + 1;
         boolean[] isPrime = new boolean[limit];
         Arrays.fill(isPrime, true);
@@ -25,7 +25,7 @@ class Solution {
 
         int count = 0;
 
-        // Case 1: Numbers of the form p^8
+        
         for (int p : primes) {
             long num = 1;
             for (int i = 0; i < 8; i++) num *= p;
@@ -33,7 +33,7 @@ class Solution {
             else break;
         }
 
-        // Case 2: Numbers of the form p^2 * q^2, with p < q
+        
         int size = primes.size();
         for (int i = 0; i < size; i++) {
             long p2 = (long)primes.get(i) * primes.get(i);
