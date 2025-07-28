@@ -1,7 +1,5 @@
 class Solution {
     public static int balanceSums(int[][] mat) {
-        // code here
-        //radheradhe
         
        int n=mat.length;
        int max=-1;
@@ -22,8 +20,6 @@ class Solution {
            
            max=Math.max(sum,max);
        }
-       
-       //store the required value in row or col
         int row[] = new int[n];
         int col[] = new int[n];
         for(int i=0;i<n;i++){
@@ -39,14 +35,10 @@ class Solution {
             }
             col[i]=max-sum;
         }
-        
-        //sum of total number of col
         int tcol=0;
         for(int i=0;i<n;i++){
             tcol+=col[i];
         }
-        
-        //compare the tcol value with each row
         int ans=0;
         for(int i=0;i<n;i++){
             ans+=Math.min(tcol,row[i]);
