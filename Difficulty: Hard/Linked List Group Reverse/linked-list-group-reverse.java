@@ -14,35 +14,39 @@ class Node
 class Solution {
     public Node reverseKGroup(Node head, int k) {
         // code here
-        Node newHeadNode = null;
-    	Node tempIterator = head;
-    	Node tempIterator2 = new Node(0);
-    	Stack<Node> stck = new Stack<Node>();
-    	while (tempIterator != null) {
-    		stck.push(tempIterator);
-    		tempIterator = tempIterator.next;
-    		if (stck.size() == k) {
-    			while (!stck.isEmpty()) {
-    				if (newHeadNode == null) {
-    					newHeadNode = stck.pop();
-    					tempIterator2 = newHeadNode;
-    				} else {
-    					tempIterator2.next = stck.pop();
-    					tempIterator2 = tempIterator2.next;
-    				}
-    			}
-    		}
-    	}
-    	while (!stck.isEmpty()) {
-			if (newHeadNode == null) {
-				newHeadNode = stck.pop();
-				tempIterator2 = newHeadNode;
-			} else {
-				tempIterator2.next = stck.pop();
-				tempIterator2 = tempIterator2.next;
-			}
-		}
-    	tempIterator2.next = null;
-        return newHeadNode;
+        if(head==null||k==1) return head;
+        Node p = new Node(0);
+        p.next = head;
+        Node prev = p,curr=head;
+        int count=0;
+        while(curr!=null) {
+            count++; 
+            curr=curr.next;
+        }
+        while(count>=k){
+            curr=prev.next;
+            Node next=curr.next;
+
+            for (int i = 1; i < k; i++) {
+                curr.next = next.next;
+                next.next = prev.next;
+                prev.next = next;
+                next = curr.next;
+            }
+            prev=curr;
+            count -= k;
+        }
+        if(count%k!=0){
+            curr=prev.next;
+            Node next=curr.next;
+            for(int i=1;i<count;i++){
+                curr.next=next.next;
+                next.next=prev.next;
+                prev.next=next;
+                next=curr.next;
+            }
+        }
+        return p.next;
+
     }
 }
