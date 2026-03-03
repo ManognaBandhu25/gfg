@@ -1,14 +1,10 @@
-import java.util.*;
-
 class Solution {
     public int totalElements(int[] arr) {
-        int n = arr.length;
-        int left = 0, right = 0, maxLength = 0;
-        Map<Integer, Integer> map = new HashMap<>();
-
-        while (right < n) {
-            map.put(arr[right], map.getOrDefault(arr[right], 0) + 1);
-
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int left = 0;
+        int maxLen = 0;
+        for (int i = 0; i< arr.length; i++) {
+            map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
             while (map.size() > 2) {
                 map.put(arr[left], map.get(arr[left]) - 1);
                 if (map.get(arr[left]) == 0) {
@@ -16,11 +12,10 @@ class Solution {
                 }
                 left++;
             }
-
-            maxLength = Math.max(maxLength, right - left + 1);
-            right++;
+            if (map.size() <= 2) {
+                maxLen = Math.max(maxLen, i -left + 1);
+            }
         }
-
-        return maxLength;
+        return maxLen;
     }
 }
